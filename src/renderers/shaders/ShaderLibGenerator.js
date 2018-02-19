@@ -10,9 +10,10 @@ import { Color } from '../../math/Color.js';
  * @author mikael emtinger / http://gomo.se/
  */
 
-var ShaderLib = {
-
-	basic: {
+var ShaderLib = function(shaderID, shaderChunkOverrides){
+   return switch (shaderID) {
+	case 'basic': 
+	   return {
 
 		uniforms: UniformsUtils.merge( [
 			UniformsLib.common,
@@ -23,10 +24,17 @@ var ShaderLib = {
 			UniformsLib.fog
 		] ),
 
-		vertexShader: ShaderChunk.meshbasic_vert,
-		fragmentShader: ShaderChunk.meshbasic_frag
+		vertexShader: shaderChunkOverrides.meshbasic_vert || ShaderChunk.meshbasic_vert,
+		fragmentShader: shaderChunkOverrides.meshbasic_frag || ShaderChunk.meshbasic_frag
 
-	},
+	   };
+	   break;
+	   
+	/*
+	 *
+	 *  The other shaders would be modied in the same way as above
+	 *
+	 */
 
 	lambert: {
 
