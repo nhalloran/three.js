@@ -6,6 +6,7 @@ import { WebGLUniforms } from './webgl/WebGLUniforms.js';
 import { UniformsLib } from './shaders/UniformsLib.js';
 import { UniformsUtils } from './shaders/UniformsUtils.js';
 import { ShaderLib } from './shaders/ShaderLib.js';
+import { ShaderLibGenerator } from './shaders/ShaderLibGenerator.js';
 import { WebGLSpriteRenderer } from './webgl/WebGLSpriteRenderer.js';
 import { WebGLShadowMap } from './webgl/WebGLShadowMap.js';
 import { WebGLAttributes } from './webgl/WebGLAttributes.js';
@@ -1516,7 +1517,7 @@ function WebGLRenderer( parameters ) {
 
 			if ( parameters.shaderID ) {
 
-				var shader = ShaderLib[ parameters.shaderID ];
+				var shader = (parameters.shaderChunks) ? ShaderLibGenerator(parameters.shaderID, parameters.shaderChunks) :  ShaderLib[ parameters.shaderID ];
 
 				materialProperties.shader = {
 					name: material.type,
